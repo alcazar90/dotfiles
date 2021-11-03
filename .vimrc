@@ -4,6 +4,9 @@
 " Learn how to use Vundle /VundleVim/Vundle.vim
 set nocompatible " not vi compatible
 
+" Make vim use the system clipboard
+set clipboard^=unnamed,unnamedplus
+
 " nerdtree
 nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeFind<CR>
@@ -92,4 +95,3 @@ inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
-
