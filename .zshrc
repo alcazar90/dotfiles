@@ -104,8 +104,25 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vsh="vim ~/.zshrc"
+alias rsh="source ~/.zshrc"
+# git aliases
+alias gs="git status"
+alias gpullo="git pull origin"
+alias gpusho="git push origin"
+alias gco="git checkout"
+alias gcm="git commit -m"
+# python aliases
+pipf='pip freeze | grep'
+pipi='pip install'
+# pyenv aliases
+alias pyvs="pyenv versions"
+alias pyshell="pyenv shell"
+alias pyvenv="pyenv virtualenv"
+alias pydel="pyenv uninstall"
 
 # Add pyenv and pyenv-virtualenv setting
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
 
