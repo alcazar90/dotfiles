@@ -1,0 +1,46 @@
+{
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [
+        119
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.languageServer": "Pylance",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+        },
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+    },
+    "ruff.lint.args": [
+        "--config=${workspaceFolder}/pyproject.toml",
+    ],
+    "ruff.format.args": [
+        "--config=${workspaceFolder}/pyproject.toml",
+    ],
+    // testing
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    // "python.analysis.inlayHints.pytestParameters": true,
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.testing.pytestArgs": [
+        ".",
+        // 
+        "--cache-clear",
+        // 
+        // Note If you have the pytest-cov coverage module installed,
+        // VS Code doesn't stop at breakpoints while debugging because
+        // pytest-cov is using the same technique to access the source code being run.
+        // To prevent this behavior, include --no-cov in pytestArgs when debugging tests.
+        "--no-cov",
+    ],
+    // 
+    // "notebook.formatOnSave.enabled": true,
+}
