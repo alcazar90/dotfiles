@@ -7,7 +7,8 @@ This repository contains my personal dotfiles configuration for macOS and Linux 
 Follow the specific instructions below to configure each component:
 
 - iTerm2 + Oh-My-Zsh Installtion: https://catalins.tech/improve-mac-terminal/
-- pyenv, virtualenv and using them with Jupyter: https://albertauyeung.github.io/2020/08/17/pyenv-jupyter.html 
+- pyenv, virtualenv and using them with Jupyter: https://albertauyeung.github.io/2020/08/17/pyenv-jupyter.html
 - Turn on the 1Password SSH agent: https://developer.1password.com/docs/ssh/get-started/#step-3-turn-on-the-1password-ssh-agent
 - Modify caps lock key as esc: [Ubuntu](https://dev.to/yuyabu/how-to-use-caps-lock-key-as-esc-on-ubuntu-18-1g7l) | [macOS](https://vim.fandom.com/wiki/Map_caps_lock_to_escape_in_macOS)
+- Claude skills: `ln -s ./dotfiles/skills ~/.claude/skills` - More info on official [Claude skills doc](https://code.claude.com/docs/en/skills)
 
