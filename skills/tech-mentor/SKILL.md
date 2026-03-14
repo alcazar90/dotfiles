@@ -21,7 +21,7 @@ Generates technical planning documents through mentorship conversation. Explains
 
 ## Existing Plan Context (auto-injected)
 
-!`if [ -f plan.md ]; then echo "=== PREVIOUS PLAN EXISTS ==="; echo ""; cat plan.md; echo ""; echo "=== END PREVIOUS PLAN ==="; else echo "No previous plan found - starting fresh."; fi`
+!cmd(bash -c 'if [ -f plan.md ]; then echo "=== PREVIOUS PLAN EXISTS ==="; echo ""; cat plan.md; echo ""; echo "=== END PREVIOUS PLAN ==="; else echo "No previous plan found - starting fresh."; fi')
 
 ---
 
