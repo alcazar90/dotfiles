@@ -128,10 +128,16 @@ Refinement Checklist:
 **Step 2: Identify your perspective's unique value**
 - **Karpathy → Zhang**: ML design to systems/UX implications
 - **Karpathy → Dean**: Model approach to scale/performance
+- **Karpathy → Viégas & Wattenberg**: Model architecture to interpretability/visualization
 - **Zhang → Karpathy**: User needs to ML feature requirements
 - **Zhang → Dean**: UX design to operational/scale constraints
+- **Zhang → Viégas & Wattenberg**: UX needs to visualization/explainability design
 - **Dean → Karpathy**: Scale requirements to model architecture
 - **Dean → Zhang**: Performance constraints to UX trade-offs
+- **Dean → Viégas & Wattenberg**: Scale constraints to visualization scalability
+- **Viégas & Wattenberg → Karpathy**: Add interpretability to ML design
+- **Viégas & Wattenberg → Zhang**: Visual analytics for better UX
+- **Viégas & Wattenberg → Dean**: Visualization challenges at scale
 
 **Step 3: Find gaps or implications**
 - What has been overlooked from your domain?
@@ -179,6 +185,12 @@ Critical rules:
 2. **Zhang (v2.0)**: Adds operational complexity analysis, UX considerations, deployment concerns
 3. **Dean (v2.5)**: Provides scale analysis, performance optimization, cost estimation
 
+### Pattern: ML → Interpretability → Production
+
+1. **Karpathy (v1.0)**: Proposes model architecture and training approach
+2. **Viégas & Wattenberg (v2.0)**: Adds interpretability analysis, visualization strategy, understanding model behavior
+3. **Zhang (v2.5)**: Evaluates how to surface insights to users, operational monitoring
+
 ### Pattern: Scale → ML/Systems
 
 1. **Dean (v1.0)**: Defines scale requirements, constraints, performance targets
@@ -190,6 +202,12 @@ Critical rules:
 1. **Zhang (v1.0)**: Defines user needs, workflow design, UX requirements
 2. **Karpathy (v2.0)**: Proposes ML approaches to meet those needs
 3. **Zhang (v2.5)**: Evaluates if ML solution actually meets original UX constraints
+
+### Pattern: Interpretability → ML → Scale
+
+1. **Viégas & Wattenberg (v1.0)**: Defines what needs to be understood, visualization goals
+2. **Karpathy (v2.0)**: Proposes ML architecture with interpretability hooks
+3. **Dean (v2.5)**: Evaluates cost of interpretability at scale, optimization strategies
 
 ## What NOT to Do (Anti-Patterns)
 

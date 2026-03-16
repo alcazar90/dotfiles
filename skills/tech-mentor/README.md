@@ -11,6 +11,7 @@ The tech-mentor skill acts as your technical mentor, helping you plan software p
 - **Andrej Karpathy** (default) - Deep Learning & ML expert
 - **Eric Zhang** - Systems & Human-Computer Interaction expert
 - **Jeff Dean** - Large-scale infrastructure & performance expert
+- **Fernanda Viégas & Martin Wattenberg** - AI interpretability & visualization experts
 
 ### Key Features
 
@@ -118,12 +119,13 @@ graph TD
 ```
 tech-mentor/
 ├── README.md                         # This file
-├── SKILL.md (385 lines)             # Main skill entry point
+├── SKILL.md                          # Main skill entry point
 ├── collaboration-guide.md            # Multi-mentor patterns & workflows
 ├── personas/
 │   ├── karpathy.md                  # Andrej Karpathy detailed guide
 │   ├── zhang.md                     # Eric Zhang detailed guide
-│   └── dean.md                      # Jeff Dean detailed guide
+│   ├── dean.md                      # Jeff Dean detailed guide
+│   └── viegas-wattenberg.md         # Viégas & Wattenberg detailed guide
 └── templates/
     ├── dialogue-format.md           # Conversation-style format
     ├── annotated-format.md          # Inline attribution format
@@ -198,7 +200,7 @@ The tech-mentor skill is the first step in a complete planning-to-execution work
 ```
 
 **Options:**
-- `--persona NAME` - Choose mentor: "Andrej Karpathy" (default), "Eric Zhang", "Jeff Dean"
+- `--persona NAME` - Choose mentor: "Andrej Karpathy" (default), "Eric Zhang", "Jeff Dean", "Viégas & Wattenberg"
 - `--analyze PATH` - Analyze codebase at path before planning
 - `--refine FILE` - Build upon existing plan (enables multi-mentor mode)
 - `--format FORMAT` - Output format: `unified` (default), `dialogue`, `annotated`
@@ -312,9 +314,13 @@ last_updated: 2026-03-13
 | Neural networks, LLMs, computer vision | Andrej Karpathy | Deep learning expertise, pedagogical approach |
 | Distributed systems, databases, caching | Jeff Dean | Large-scale systems, performance optimization |
 | User-facing applications, APIs, dashboards | Eric Zhang | Systems + UX, operational simplicity |
+| Model interpretability, explainability | Viégas & Wattenberg | Mechanistic interpretability, visualization |
+| Data visualization, visual analytics | Viégas & Wattenberg | Information design, interactive exploration |
+| Creative AI, generative art | Viégas & Wattenberg | Artistic exploration, human-AI collaboration |
 | Training infrastructure, MLOps | Karpathy + Dean | ML expertise + scale considerations |
 | Real-time collaboration, interactive systems | Zhang + Dean | UX + performance requirements |
-| Production ML systems | All three | ML → Systems → Scale perspectives |
+| Production ML with monitoring | Karpathy + Viégas & Wattenberg | Model development + interpretability |
+| Production ML systems | All four | ML → Systems → Scale → Interpretability |
 
 ## Contributing to the Skill
 

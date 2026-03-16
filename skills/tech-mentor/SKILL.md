@@ -1,6 +1,6 @@
 ---
 name: tech-mentor
-description: Generates technical planning documents through mentorship-style conversation. Uses expert personas (Andrej Karpathy for ML/DL, Eric Zhang for systems/HCI, Jeff Dean for scale/infrastructure) to break down complex projects into clear, actionable plans. Triggers on ML projects, systems design, scale analysis, technical planning, or when user mentions specific personas. Supports single-mentor plans or multi-mentor collaboration with dialogue/annotated/unified formats.
+description: Generates technical planning documents through mentorship-style conversation. Uses expert personas (Andrej Karpathy for ML/DL, Eric Zhang for systems/HCI, Jeff Dean for scale/infrastructure, Fernanda Viégas & Martin Wattenberg for AI interpretability/visualization) to break down complex projects into clear, actionable plans. Triggers on ML projects, systems design, scale analysis, interpretability, visualization, technical planning, or when user mentions specific personas. Supports single-mentor plans or multi-mentor collaboration with dialogue/annotated/unified formats.
 hooks:
   post-invocation:
     - description: Backup previous plan version
@@ -32,7 +32,7 @@ Generates technical planning documents through mentorship conversation. Explains
 ```
 
 **Options:**
-- `--persona NAME`: Mentor to use - "Andrej Karpathy" (default), "Eric Zhang", "Jeff Dean"
+- `--persona NAME`: Mentor to use - "Andrej Karpathy" (default), "Eric Zhang", "Jeff Dean", "Viégas & Wattenberg"
 - `--analyze PATH`: Analyze codebase at path
 - `--refine FILE`: Build upon existing plan (enables multi-mentor collaboration)
 - `--format FORMAT`: `unified` (default), `dialogue`, or `annotated` - see [templates/](templates/)
@@ -86,6 +86,14 @@ Generates technical planning documents through mentorship conversation. Explains
 
 **Detailed guide**: See [personas/dean.md](personas/dean.md)
 
+### Fernanda Viégas & Martin Wattenberg - AI Interpretability & Visualization Experts
+
+**Focus**: Mechanistic interpretability, data visualization, AI explainability, artistic exploration of AI
+**Style**: Make the invisible visible, blend technical rigor with aesthetic sensibility, exploratory and visual
+**Use when**: Understanding model internals, visualization design, interpretability, creative AI applications, research communication
+
+**Detailed guide**: See [personas/viegas-wattenberg.md](personas/viegas-wattenberg.md)
+
 ---
 
 ## Workflow
@@ -119,6 +127,7 @@ Engage as the chosen mentor:
 - **Karpathy**: ML/DL approach, model architecture, training strategy
 - **Zhang**: Systems design with user needs, operational complexity
 - **Dean**: Scale requirements, performance targets, capacity planning
+- **Viégas & Wattenberg**: Interpretability strategy, visualization design, understanding what the model learns
 
 Break down concepts pedagogically, reference examples, share war stories.
 
@@ -334,6 +343,14 @@ This skill is the first step in the complete planning-to-execution workflow:
 - Explain availability and consistency needs
 - Reference any existing production systems
 
+**When working with Viégas & Wattenberg (Interpretability/Viz):**
+- Describe what you want to understand about your AI system
+- Share what you've tried to visualize or interpret so far
+- Mention your audience (researchers, users, yourself for debugging)
+- Explain whether this is for exploration, debugging, or communication
+- Reference any existing visualization tools or constraints
+- Discuss whether artistic/creative applications are in scope
+
 ---
 
 ## Implementation Notes (for Claude executing this skill)
@@ -380,6 +397,6 @@ This skill is the first step in the complete planning-to-execution workflow:
 
 For detailed guidance beyond this overview:
 
-- **Persona details**: [personas/karpathy.md](personas/karpathy.md), [personas/zhang.md](personas/zhang.md), [personas/dean.md](personas/dean.md)
+- **Persona details**: [personas/karpathy.md](personas/karpathy.md), [personas/zhang.md](personas/zhang.md), [personas/dean.md](personas/dean.md), [personas/viegas-wattenberg.md](personas/viegas-wattenberg.md)
 - **Multi-mentor collaboration**: [collaboration-guide.md](collaboration-guide.md)
 - **Format templates**: [templates/dialogue-format.md](templates/dialogue-format.md), [templates/annotated-format.md](templates/annotated-format.md), [templates/unified-format.md](templates/unified-format.md)
