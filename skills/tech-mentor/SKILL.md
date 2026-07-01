@@ -18,7 +18,7 @@ deterministically from that data, never re-inferred by the LLM.
 
 ## Existing Plan Context (auto-injected)
 
-!cmd(bash -c 'if [ -f plan.yaml ]; then echo "=== PREVIOUS PLAN EXISTS ==="; echo ""; cat plan.yaml; echo ""; echo "=== END PREVIOUS PLAN ==="; else echo "No previous plan found - starting fresh."; fi')
+!cmd(python3 scripts/status.py plan.yaml 2>/dev/null || echo "No previous plan found - starting fresh.")
 
 ---
 
@@ -40,6 +40,10 @@ Persona selection guidance and detailed voice/style: `references/personas/`.
 
 ## Workflow: New Plan (single mentor)
 
+0. **Check for existing plan** — if the auto-injected context above shows
+   "PREVIOUS PLAN EXISTS" and the user did NOT pass `--refine`, ask: "I see
+   an existing plan (vX.X). Do you want to refine it with a new perspective,
+   or start fresh?" Do not silently overwrite.
 1. **Understand the problem** — goals, constraints (data, compute, time,
    team), current baseline. If `--analyze` given, read the codebase first.
 2. **Ask clarifying questions** before proposing anything — see
@@ -108,9 +112,11 @@ Full format details and worked examples: `references/format-guide.md`.
 
 ```bash
 scripts/validate.sh plan.yaml                          # check referential integrity
-scripts/query.sh plan.yaml type challenge                # find open challenges/fault lines
+scripts/query.sh plan.yaml type challenge                # all challenges (open + resolved)
+scripts/query.sh plan.yaml unresolved                    # only unresolved challenges
 scripts/query.sh plan.yaml mentor zhang                  # everything one mentor contributed
 python3 scripts/render_plan.py plan.yaml --format X       # render a view
+python3 scripts/status.py plan.yaml                      # compact plan summary
 ```
 
 Run `validate` after every refinement. It's the cheapest possible check and

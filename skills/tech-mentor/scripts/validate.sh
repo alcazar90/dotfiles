@@ -18,6 +18,7 @@ PLAN="${1:-plan.yaml}"
 yq -o=json . "$PLAN" | jq -r '
   [.contributions[].id] as $ids |
   [.components[].id] as $comps |
+  [.contributions[] | select(.type == "challenge") | .id] as $challenges |
   (
     [.contributions[] | select(.in_reply_to != null and ([.in_reply_to] - $ids | length > 0))
       | "broken in_reply_to: \(.id) -> \(.in_reply_to)"]
@@ -27,6 +28,12 @@ yq -o=json . "$PLAN" | jq -r '
     +
     [.contributions[] | select([.component] - $comps | length > 0)
       | "unknown component in \(.id) -> \(.component)"]
+    +
+    [.contributions[] | select(.resolves != null and ([.resolves] - $ids | length > 0))
+      | "broken resolves: \(.id) -> \(.resolves)"]
+    +
+    [.contributions[] | select(.resolves != null and ([.resolves] - $challenges | length > 0))
+      | "resolves non-challenge: \(.id) -> \(.resolves)"]
   ) as $errors |
   if ($errors | length) == 0 then "all references valid" else $errors[] end
 '

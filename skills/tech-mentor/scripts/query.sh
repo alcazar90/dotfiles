@@ -4,6 +4,7 @@
 #   ./query.sh plan.yaml type challenge
 #   ./query.sh plan.yaml mentor zhang
 #   ./query.sh plan.yaml component calibration_module
+#   ./query.sh plan.yaml unresolved            # challenges not yet resolved
 # Requires: yq (mikefarah/Go version, NOT the python-yq from pip) + jq
 set -euo pipefail
 
@@ -18,6 +19,14 @@ done
 
 PLAN="$1"; FIELD="$2"; VALUE="$3"
 
-yq -o=json . "$PLAN" | jq -r --arg f "$FIELD" --arg v "$VALUE" '
-  .contributions[] | select(.[$f] == $v) | "[\(.id)] \(.mentor) (\(.type)) — \(.summary)"
-'
+if [ "$FIELD" = "unresolved" ]; then
+  yq -o=json . "$PLAN" | jq -r '
+    [.contributions[] | select(.resolves != null) | .resolves] as $resolved |
+    .contributions[] | select(.type == "challenge" and ([.id] - $resolved | length > 0))
+    | "[\(.id)] \(.mentor) (\(.type)) — \(.summary)"
+  '
+else
+  yq -o=json . "$PLAN" | jq -r --arg f "$FIELD" --arg v "$VALUE" '
+    .contributions[] | select(.[$f] == $v) | "[\(.id)] \(.mentor) (\(.type)) — \(.summary)"
+  '
+fi

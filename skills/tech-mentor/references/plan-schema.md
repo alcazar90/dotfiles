@@ -37,6 +37,7 @@ contributions:
     type: proposal | extension | challenge | response
     in_reply_to: string | null    # id of the contribution this responds to, if any
     depends_on: [string]          # ids this contribution's reasoning depends on
+    resolves: string | null       # id of a challenge this response closes (response type only)
     summary: string               # one line, used in dialogue-view attribution tags
     body: |                       # full prose — the mentor's actual reasoning, untouched
       ...
@@ -65,7 +66,9 @@ duplicate of the content.
 - `challenge` — surfaces a problem, risk, or unresolved trade-off in a prior
   contribution (these are what `query.sh ... type challenge` finds — the
   wizard's "fault lines," informally, inside tech-mentor)
-- `response` — addresses a specific `challenge`
+- `response` — addresses a specific `challenge`. Set `resolves` to the
+  challenge's id to mark it closed; omit `resolves` if the response only
+  partially addresses the concern
 
 ## Operations
 

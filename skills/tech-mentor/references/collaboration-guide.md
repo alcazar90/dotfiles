@@ -46,7 +46,7 @@ From a [perspective] lens, this component also needs:
 [Commentary with specific concerns or extensions]
 ```
 
-### 3. Unified Format (Default)
+### 3. Unified Format
 
 **When to use:** Synthesizing perspectives into coherent whole, final production documentation, simpler reading experience.
 
@@ -74,25 +74,30 @@ From a [perspective] lens, this component also needs:
 
 ## Document Metadata Structure
 
-All multi-mentor documents should include this metadata header:
+Plans are stored as `plan.yaml` — see `plan-schema.md` for the full schema.
+The top-level fields:
 
-```markdown
----
-title: Project Name
+```yaml
+title: "Project Name"
+version: 2.0                    # bump on every refinement
+last_updated: "YYYY-MM-DD"
+
 mentors:
-  - name: First Mentor
-    iterations: [1.0]
-    focus: their perspective
-    date: YYYY-MM-DD
-  - name: Second Mentor
-    iterations: [2.0]
-    focus: their perspective
-    date: YYYY-MM-DD
-version: 2.0
-last_updated: YYYY-MM-DD
-base_version: 1.0
----
+  - id: karpathy
+    name: "Andrej Karpathy"
+    focus: "ML architecture"
+  - id: zhang
+    name: "Eric Zhang"
+    focus: "Systems design"
+
+components:
+  - id: component_name
+    title: "Component Title"
 ```
+
+Each contribution in the `contributions` array carries `type`,
+`in_reply_to`, and `depends_on` to express the collaboration structure.
+See `plan-schema.md` for field details.
 
 ## Cross-Reference Syntax
 

@@ -76,7 +76,11 @@ def render_annotated(plan, component=None):
     for c in filter_contributions(plan, component):
         by_component[c["component"]].append(c)
 
-    for comp_id, contributions in by_component.items():
+    for comp in plan["components"]:
+        comp_id = comp["id"]
+        if comp_id not in by_component:
+            continue
+        contributions = by_component[comp_id]
         out.append(f'## {component_title(plan, comp_id)}\n')
         contributions.sort(key=lambda c: c["version"])
         for i, c in enumerate(contributions):
@@ -102,7 +106,11 @@ def render_dialogue(plan, component=None):
 
     by_id = {c["id"]: c for c in plan["contributions"]}
 
-    for comp_id, contributions in by_component.items():
+    for comp in plan["components"]:
+        comp_id = comp["id"]
+        if comp_id not in by_component:
+            continue
+        contributions = by_component[comp_id]
         out.append(f'### Thread: {component_title(plan, comp_id)}\n')
         contributions.sort(key=lambda c: c["version"])
         for c in contributions:
@@ -133,7 +141,11 @@ def render_unified(plan, component=None):
     for c in filter_contributions(plan, component):
         by_component[c["component"]].append(c)
 
-    for comp_id, contributions in by_component.items():
+    for comp in plan["components"]:
+        comp_id = comp["id"]
+        if comp_id not in by_component:
+            continue
+        contributions = by_component[comp_id]
         out.append(f'## {component_title(plan, comp_id)}\n')
         contributions.sort(key=lambda c: (TYPE_ORDER.get(c["type"], 9), c["version"]))
         for c in contributions:
