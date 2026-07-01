@@ -10,7 +10,7 @@ When multiple mentors contribute to a plan, use this guide to structure their pe
 
 **Structure:** Conversation threads between mentors with clear attribution and cross-references.
 
-**See:** [templates/dialogue-format.md](templates/dialogue-format.md) for complete example.
+**See:** [format-guide.md](format-guide.md) for details on all three rendered views.
 
 **Key pattern:**
 ```markdown
@@ -30,7 +30,7 @@ Good point. Here's how we address it...
 
 **Structure:** Component-based with inline mentor sections.
 
-**See:** [templates/annotated-format.md](templates/annotated-format.md) for complete example.
+**See:** [format-guide.md](format-guide.md) for details on all three rendered views.
 
 **Key pattern:**
 ```markdown
@@ -52,7 +52,7 @@ From a [perspective] lens, this component also needs:
 
 **Structure:** Integrated narrative with grouped perspectives.
 
-**See:** [templates/unified-format.md](templates/unified-format.md) for complete example.
+**See:** [format-guide.md](format-guide.md) for details on all three rendered views.
 
 **Key pattern:**
 ```markdown
