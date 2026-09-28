@@ -125,4 +125,30 @@ alias pydel="pyenv uninstall"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# Add poetry
+export PATH="/Users/cristobalalcazar/.local/bin:$PATH"
 
+# Added by codeen install
+export PATH="/Users/cristobalalcazar/.local/bin/codeen:$PATH"
+
+# Change the claude settings whether the use is personal or load corporate settings
+claude-mode() {
+    local target=""
+    case "$1" in
+        corp) target=~/.claude/settings-corp.json ;;
+        personal) target=~/.claude/settings-personal.json ;;
+        *) echo "uso: claude-mode [corp|personal]"; return 1 ;;
+    esac
+
+    if [[ ! -f "$target" ]]; then
+        echo "✗ no existe: $target"
+        return 1
+    fi
+
+    ln -sf "$target" ~/.claude/settings.json
+    echo "→ modo: $(readlink ~/.claude/settings.json)"
+}
+
+claude-whoami() {
+    echo "→ modo: $(readlink ~/.claude/settings.json)"
+}
