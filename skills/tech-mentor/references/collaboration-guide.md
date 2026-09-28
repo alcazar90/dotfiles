@@ -99,14 +99,18 @@ Each contribution in the `contributions` array carries `type`,
 `in_reply_to`, and `depends_on` to express the collaboration structure.
 See `plan-schema.md` for field details.
 
-## Cross-Reference Syntax
+## Cross-Referencing Between Mentors
 
-Use clear attribution when mentors respond to each other:
+In `plan.yaml`, cross-references are structural — not hand-written markdown:
 
-- `[Mentor - vX.X]` - Original contribution
-- `[Mentor - vX.X, → Other on Topic]` - Responding to another mentor
-- `[Mentor - vX.X, building on Other's approach]` - Extending another's idea
-- `[Mentor - vX.X, alternative to Other's suggestion]` - Proposing alternative
+- **`in_reply_to`**: set to the `id` of the contribution you're responding to
+- **`depends_on`**: list of `id`s this contribution's reasoning relies on
+- **`type`**: `extension` (building on), `challenge` (disputing), `response` (answering a challenge)
+- **`resolves`**: set on a `response` to mark a `challenge` as closed
+
+The renderer handles display attribution automatically based on these fields.
+You never write `[Mentor - vX.X, → Other on Topic]` by hand — the dialogue
+format generates it from `in_reply_to`.
 
 ## Refinement Process Workflow
 
@@ -143,6 +147,14 @@ Refinement Checklist:
 - **Viégas & Wattenberg → Karpathy**: Add interpretability to ML design
 - **Viégas & Wattenberg → Zhang**: Visual analytics for better UX
 - **Viégas & Wattenberg → Dean**: Visualization challenges at scale
+- **Pearl → Karpathy**: Causal constraints on model design, confounding risks
+- **Pearl → Zhang**: Experiment UX, operational complexity of randomization
+- **Pearl → Dean**: Scale of experimentation platforms, statistical power at volume
+- **Pearl → Viégas & Wattenberg**: Visualizing causal graphs, communicating counterfactuals
+- **Karpathy → Pearl**: ML predictions that need causal validation
+- **Zhang → Pearl**: User behavior questions requiring causal inference
+- **Dean → Pearl**: Scale constraints on experiment design
+- **Viégas & Wattenberg → Pearl**: Visual exploration of causal structure
 
 **Step 3: Find gaps or implications**
 - What has been overlooked from your domain?
@@ -162,10 +174,10 @@ Critical rules:
 - ADD new perspective, don't duplicate existing information
 
 **Step 6: Update metadata**
-- Increment version number (1.0 → 2.0)
-- Add new mentor to mentors list with iteration number
+- Bump `version` at the top level (1.0 → 2.0)
+- Add new mentor to `mentors` array with `id`, `name`, `focus`
 - Update `last_updated` date
-- Keep `base_version` pointing to original
+- See `plan-schema.md` for the full field reference
 
 **Step 7: Ensure format consistency**
 - If previous plan used dialogue, continue dialogue (or explicitly switch)

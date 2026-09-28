@@ -7,7 +7,7 @@ set -euo pipefail
 for cmd in yq jq; do
   command -v "$cmd" >/dev/null 2>&1 || {
     echo "Error: $cmd is required but not installed." >&2
-    [ "$cmd" = "yq" ] && echo "Install the Go version: brew install go-yq" >&2
+    [ "$cmd" = "yq" ] && echo "Install with: brew install yq" >&2
     [ "$cmd" = "jq" ] && echo "Install with: brew install jq" >&2
     exit 1
   }
@@ -18,6 +18,7 @@ PLAN="${1:-plan.yaml}"
 yq -o=json . "$PLAN" | jq -r '
   [.contributions[].id] as $ids |
   [.components[].id] as $comps |
+  [.mentors[].id] as $mentors |
   [.contributions[] | select(.type == "challenge") | .id] as $challenges |
   (
     [.contributions[] | select(.in_reply_to != null and ([.in_reply_to] - $ids | length > 0))
@@ -28,6 +29,9 @@ yq -o=json . "$PLAN" | jq -r '
     +
     [.contributions[] | select([.component] - $comps | length > 0)
       | "unknown component in \(.id) -> \(.component)"]
+    +
+    [.contributions[] | select([.mentor] - $mentors | length > 0)
+      | "unknown mentor in \(.id) -> \(.mentor)"]
     +
     [.contributions[] | select(.resolves != null and ([.resolves] - $ids | length > 0))
       | "broken resolves: \(.id) -> \(.resolves)"]

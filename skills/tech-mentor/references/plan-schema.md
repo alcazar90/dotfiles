@@ -24,6 +24,7 @@ mentors:
   - id: string                  # short handle, e.g. "karpathy"
     name: string                # display name
     focus: string                # one-line perspective summary
+    kind: persona | direct       # optional, default "persona"
 
 components:
   - id: string                  # short handle, e.g. "calibration_module"
@@ -69,6 +70,22 @@ duplicate of the content.
 - `response` — addresses a specific `challenge`. Set `resolves` to the
   challenge's id to mark it closed; omit `resolves` if the response only
   partially addresses the concern
+
+## `kind: direct` mentors
+
+Two reserved ids skip the persona pipeline entirely — no `references/personas/<id>.md`,
+no `--trial-persona`/`--promote-persona` gate, because there's no distinctiveness
+claim to test:
+
+- `user` — your own opinion, first person, in your actual words
+- `assistant` — a plain LLM contribution, no persona voice, for background/context
+  when no registered mentor's lens fits
+
+Their contributions use the same fields as any persona's — `type`, `in_reply_to`,
+`challenge`, `response`, `resolves` all apply unchanged. Triggered via
+`--persona "You"` / `--persona "Assistant"` (see Arguments in `SKILL.md`).
+Renderers mark these visibly (`kind: direct`) so they're never mistaken for a
+vetted persona's real documented position.
 
 ## Operations
 

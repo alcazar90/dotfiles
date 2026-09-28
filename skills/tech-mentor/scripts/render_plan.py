@@ -32,7 +32,8 @@ def load_plan(path):
 def mentor_name(plan, mentor_id):
     for m in plan["mentors"]:
         if m["id"] == mentor_id:
-            return m["name"]
+            suffix = " · direct" if m.get("kind") == "direct" else ""
+            return m["name"] + suffix
     return mentor_id
 
 
@@ -149,8 +150,9 @@ def render_unified(plan, component=None):
         out.append(f'## {component_title(plan, comp_id)}\n')
         contributions.sort(key=lambda c: (TYPE_ORDER.get(c["type"], 9), c["version"]))
         for c in contributions:
-            focus = next(m["focus"] for m in plan["mentors"] if m["id"] == c["mentor"])
-            out.append(f"*From {focus}:*\n")
+            m = next(m for m in plan["mentors"] if m["id"] == c["mentor"])
+            suffix = " · direct" if m.get("kind") == "direct" else ""
+            out.append(f"*From {m['focus']}{suffix}:*\n")
             out.append(c["body"].strip() + "\n")
         out.append("")
     return "\n".join(out)
