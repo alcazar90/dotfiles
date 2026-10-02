@@ -106,27 +106,33 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vsh="vim ~/.zshrc"
 alias rsh="source ~/.zshrc"
+
 # git aliases
 alias gs="git status"
 alias gpullo="git pull origin"
 alias gpusho="git push origin"
 alias gco="git checkout"
 alias gcm="git commit -m"
+
 # python aliases
 pipf='pip freeze | grep'
 pipi='pip install'
-
-# uv corporate mode (optional) - uncomment on a corp machine behind a TLS proxy/Artifactory.
-# Uses the OS cert store (avoids `invalid peer certificate: UnknownIssuer`) and picks up the
-# Artifactory extra index from ~/.pip/pip.conf (single source of truth), so set that up first.
-# export UV_SYSTEM_CERTS=1
-# export UV_EXTRA_INDEX_URL="$(sed -n 's/^extra-index-url *= *//p' ~/.pip/pip.conf 2>/dev/null)"
 
 # pyenv aliases
 alias pyvs="pyenv versions"
 alias pyshell="pyenv shell"
 alias pyvenv="pyenv virtualenv"
 alias pydel="pyenv uninstall"
+
+# Add pyenv and pyenv-virtualenv setting
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# uv corporate mode (optional) - uncomment on a corp machine behind a TLS proxy/Artifactory.
+# Uses the OS cert store (avoids `invalid peer certificate: UnknownIssuer`) and picks up the
+# Artifactory extra index from ~/.pip/pip.conf (single source of truth), so set that up first.
+# export UV_SYSTEM_CERTS=1
+# export UV_EXTRA_INDEX_URL="$(sed -n 's/^extra-index-url *= *//p' ~/.pip/pip.conf 2>/dev/null)"
 
 # Set the global `python`/`python3` version via uv (installs it, links the
 # shims in uv's bin dir, and pins it as uv's global default)
@@ -135,13 +141,6 @@ pyglobal() {
     uv python install "$1" --default && uv python pin --global "$1"
     echo "→ python global: $(python3 --version)"
 }
-
-# Add pyenv and pyenv-virtualenv setting
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# Add poetry
-export PATH="/Users/cristobalalcazar/.local/bin:$PATH"
 
 # Added by codeen install
 export PATH="/Users/cristobalalcazar/.local/bin/codeen:$PATH"
