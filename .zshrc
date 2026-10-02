@@ -128,6 +128,14 @@ alias pyshell="pyenv shell"
 alias pyvenv="pyenv virtualenv"
 alias pydel="pyenv uninstall"
 
+# Set the global `python`/`python3` version via uv (installs it, links the
+# shims in uv's bin dir, and pins it as uv's global default)
+pyglobal() {
+    [[ -z "$1" ]] && { echo "uso: pyglobal <version>"; return 1; }
+    uv python install "$1" --default && uv python pin --global "$1"
+    echo "→ python global: $(python3 --version)"
+}
+
 # Add pyenv and pyenv-virtualenv setting
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
