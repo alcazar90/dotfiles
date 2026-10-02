@@ -14,8 +14,9 @@ Follow the specific instructions below to configure each component:
 - [uv](https://docs.astral.sh/uv/) for Python version and virtualenv management:
   - Install: `curl -LsSf https://astral.sh/uv/install.sh | sh`
   - Install a Python version: `uv python install 3.12`
-  - Create a project virtualenv: `uv venv` (defaults to `.venv`, picks up `.python-version` if present)
+  - Create a project virtualenv: `uv venv` (defaults to `.venv`, picks up `.python-version` if present). Or you can directly specify the python version like `uv venv -p 3.12`.
   - Activate it: `source .venv/bin/activate`
   - Add/install deps: `uv add <package>` or `uv pip install -r requirements.txt`
   - Pin the Python version for a project: `uv python pin 3.12`
+  - **Corporate machine only** (behind the corporate TLS proxy/Artifactory): set up `~/.pip/pip.conf` first (see pip docs for the `[global]`/`extra-index-url`/`trusted-host` format), then `.zshrc` sets `UV_SYSTEM_CERTS=1` (trust the OS cert store instead of uv's bundled one, needed or you'll get `invalid peer certificate: UnknownIssuer`) and exports `UV_EXTRA_INDEX_URL` from `~/.pip/pip.conf`'s `extra-index-url`, so `uv` resolves private packages through the same index as `pip`
 

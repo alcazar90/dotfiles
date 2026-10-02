@@ -115,6 +115,13 @@ alias gcm="git commit -m"
 # python aliases
 pipf='pip freeze | grep'
 pipi='pip install'
+
+# uv corporate mode (optional) - uncomment on a corp machine behind a TLS proxy/Artifactory.
+# Uses the OS cert store (avoids `invalid peer certificate: UnknownIssuer`) and picks up the
+# Artifactory extra index from ~/.pip/pip.conf (single source of truth), so set that up first.
+# export UV_SYSTEM_CERTS=1
+# export UV_EXTRA_INDEX_URL="$(sed -n 's/^extra-index-url *= *//p' ~/.pip/pip.conf 2>/dev/null)"
+
 # pyenv aliases
 alias pyvs="pyenv versions"
 alias pyshell="pyenv shell"
