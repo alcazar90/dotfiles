@@ -11,4 +11,11 @@ Follow the specific instructions below to configure each component:
 - Turn on the 1Password SSH agent: https://developer.1password.com/docs/ssh/get-started/#step-3-turn-on-the-1password-ssh-agent
 - Modify caps lock key as esc: [Ubuntu](https://dev.to/yuyabu/how-to-use-caps-lock-key-as-esc-on-ubuntu-18-1g7l) | [macOS](https://vim.fandom.com/wiki/Map_caps_lock_to_escape_in_macOS)
 - Claude skills: `ln -s ./dotfiles/skills ~/.claude/skills` - More info on official [Claude skills doc](https://code.claude.com/docs/en/skills)
+- [uv](https://docs.astral.sh/uv/) for Python version and virtualenv management:
+  - Install: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+  - Install a Python version: `uv python install 3.12`
+  - Create a project virtualenv: `uv venv` (defaults to `.venv`, picks up `.python-version` if present)
+  - Activate it: `source .venv/bin/activate`
+  - Add/install deps: `uv add <package>` or `uv pip install -r requirements.txt`
+  - Pin the Python version for a project: `uv python pin 3.12`
 
