@@ -32,6 +32,7 @@ alias gpullo="git pull origin"
 alias gpusho="git push origin"
 alias gco="git checkout"
 alias gcm="git commit -m"
+alias glol="git log --oneline -n"
 
 # python
 alias pipf='pip freeze | grep'
@@ -42,12 +43,6 @@ alias pyls='uv python list'
 alias pycask='uv python install'
 
 # ── uv ──────────────────────────────────────────────
-# Corporate mode (optional) - uncomment on a corp machine behind a TLS proxy/Artifactory.
-# Uses the OS cert store (avoids `invalid peer certificate: UnknownIssuer`) and picks up the
-# Artifactory extra index from ~/.pip/pip.conf (single source of truth), so set that up first.
-# export UV_SYSTEM_CERTS=1
-# export UV_EXTRA_INDEX_URL="$(sed -n 's/^extra-index-url *= *//p' ~/.pip/pip.conf 2>/dev/null)"
-
 # Set the global `python`/`python3` version via uv (installs it, links the
 # shims in uv's bin dir, and pins it as uv's global default)
 pyglobal() {
