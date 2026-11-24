@@ -1,5 +1,3 @@
-export PATH="$HOME/.local/bin:$PATH"
-
 # ── Prompt with git branch ─────────────────────────
 autoload -Uz vcs_info add-zsh-hook
 add-zsh-hook precmd vcs_info
@@ -9,18 +7,44 @@ zstyle ':vcs_info:git:*' formats ' %F{#CE5D97}(%b)%f'
 PROMPT='%F{#92BFDB}%~%f${vcs_info_msg_0_} ❯ '
 
 # ── Completado e historial (antes lo configuraba Oh My Zsh) ──
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(-w+1wk) ]]; then compinit
+else compinit -C; fi
+
+# Colores para ls y el menú de completado
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabag
+export LS_COLORS='di=38;5;39:ln=38;5;51:so=38;5;48:pi=38;5;47:do=38;5;220:bd=38;5;45;1:cd=38;5;210;1:or=red;1:ex=38;5;220;1:su=38;5;196;4:sg=38;5;190;4:tw=38;5;48;4:st=38;5;220;4'
+
+zmodload zsh/complist
+zstyle ':completion:*' menu select {long,complete,history}-list
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'   # ignora mayúsculas
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt SHARE_HISTORY HIST_IGNORE_DUPS
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_EXPIRE_DUPS_FIRST \
+      HIST_REDUCE_BLANKS HIST_FCNTL_LOCK HIST_VERIFY EXTENDED_HISTORY
 
 # ── Search web from the terminal ──
-_ws() { local url="$1"; shift; open "${url}${(j:+:)@}"; }
-google() { _ws "https://www.google.com/search?q=" "$@"; }
+# URL-encode a string (RFC 3986: A-Z a-z 0-9 - _ . ~ kept, rest -> %XX).
+# Pure-zsh (no python dependency). Encodes each byte of the UTF-8 string.
+urlencode() {
+  local out="" s="$1" c off
+  off=0
+  while (( off < ${#s} )); do
+    c="${s:$((off)):1}"
+    if [[ $c == [a-zA-Z0-9\-_.~] ]]; then
+      out+="$c"
+    else
+      out+=$(printf '%%%02X' "'$c")
+    fi
+    (( off++ ))
+  done
+  print -r -- "$out"
+}
+google() { open "https://www.google.com/search?q=$(urlencode "${(j: :)@}")"; }
 
 # ── Aliases ─────────────────────────────────────────
 alias vsh="vim ~/.zshrc"
@@ -47,7 +71,7 @@ alias pycask='uv python install'
 # shims in uv's bin dir, and pins it as uv's global default)
 pyglobal() {
     [[ -z "$1" ]] && { echo "uso: pyglobal <version>"; return 1; }
-    uv python install "$1" --default && uv python pin --global "$1"
+    uv python install --quiet "$1" --default && uv python pin --global "$1"
     echo "→ python global: $(python3 --version)"
 }
 
